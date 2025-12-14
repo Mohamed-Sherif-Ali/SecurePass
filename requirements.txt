@@ -1,0 +1,51 @@
+# ═══════════════════════════════════════════════════════════════════
+# SecurePass - Password Manager Dependencies
+# ═══════════════════════════════════════════════════════════════════
+#
+# Installation:
+#   pip install -r requirements.txt
+#
+# ═══════════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────────
+# Cryptography
+# ───────────────────────────────────────────────────────────────────
+
+# PyCryptodome - AES-GCM encryption and PBKDF2 key derivation
+pycryptodome==3.19.0
+
+# ───────────────────────────────────────────────────────────────────
+# GUI Framework
+# ───────────────────────────────────────────────────────────────────
+
+# PyQt5 - Cross-platform GUI toolkit
+PyQt5==5.15.10
+
+# ───────────────────────────────────────────────────────────────────
+# Clipboard Management
+# ───────────────────────────────────────────────────────────────────
+
+# pyperclip - Cross-platform clipboard operations
+pyperclip==1.8.2
+
+# ═══════════════════════════════════════════════════════════════════
+# Platform-Specific Notes
+# ═══════════════════════════════════════════════════════════════════
+#
+# Linux:
+#   May need system packages for PyQt5:
+#   - Ubuntu/Debian: sudo apt install python3-pyqt5
+#   - Fedora: sudo dnf install python3-qt5
+#
+#   For clipboard support, install one of:
+#   - xclip: sudo apt install xclip
+#   - xsel: sudo apt install xsel
+#
+# macOS:
+#   Install via Homebrew if needed:
+#   - brew install python-tk
+#
+# Windows:
+#   All dependencies install via pip normally
+#
+# ═══════════════════════════════════════════════════════════════════
