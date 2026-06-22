@@ -1,20 +1,24 @@
-# 🔐 SecurePass
+# SecurePass
 
-**Secure Multi-User Password Manager with Military-Grade Encryption**
+**Local Multi-User Password Manager**
 
-A locally-stored password manager featuring AES-256-GCM encryption, PBKDF2 key derivation, and a modern dark-themed Qt5 interface. All your passwords encrypted and stored securely on your machine—no cloud, no tracking, complete privacy.
+SecurePass is an desktop password manager built with Python, PyQt5, SQLite, and authenticated encryption.
 
----
+Stored passwords are encrypted locally using AES-256-GCM. Encryption keys are derived from each user's master password using PBKDF2 and randomly generated salts.
+
+> SecurePass is a learning project and has not undergone an independent security audit. Do not use it as the only storage location for critical credentials.
 
 ## ✨ Features
 
 ### 🛡️ **Security**
-- **AES-256-GCM Encryption** - Military-grade authenticated encryption
-- **PBKDF2 Key Derivation** - 600,000 iterations (OWASP 2023 recommendation)
-- **Unique Salts** - Different salt for every encrypted field
-- **Master Password Verification** - Never stores passwords in plaintext
-- **Local Storage Only** - Your data never leaves your computer
-- **Secure Database Permissions** - Owner read/write only (0600)
+- AES-256-GCM authenticated encryption
+- PBKDF2-based key derivation
+- Random salt and nonce for each encryption operation
+- Authentication tags for detecting modified ciphertext
+- Master-password verification without storing the master password
+- Local SQLite storage
+- Owner-only database permissions where supported
+- Clipboard clearing after 30 seconds
 
 ### 🎨 **User Experience**
 - **Multi-User Support** - Different users, different master passwords
@@ -59,8 +63,8 @@ A locally-stored password manager featuring AES-256-GCM encryption, PBKDF2 key d
 
 ```bash
 # Clone repository
-git clone https://github.com/Mohamed-Sherif-Ali/securepass.git
-cd securepass
+git clone https://github.com/Mohamed-Sherif-Ali/SecurePass.git
+cd SecurePass
 
 # Install dependencies
 pip install -r requirements.txt
@@ -331,12 +335,14 @@ Options:
 
 Traditional AES-CBC only encrypts but doesn't detect tampering. An attacker could modify ciphertext. GCM prevents this with authentication tags.
 
-### Why PBKDF2 with 600k iterations?
 
-**PBKDF2** (Password-Based Key Derivation Function) makes brute-force attacks expensive:
+### Key Derivation
 
-- Without PBKDF2: Attacker tries 1 billion passwords/second
-- With PBKDF2 (600k iterations): Attacker tries ~1,600 passwords/second
+SecurePass currently configures PBKDF2 with 600,000 iterations and derives a 32-byte encryption key from the user's master password and a randomly generated salt.
+
+The work factor makes password guessing more computationally expensive, but actual resistance depends heavily on the strength of the user's master password, the selected PBKDF2 hash function, and the attacker's hardware.
+
+Cryptographic parameters should be reviewed and benchmarked before treating the application as production-ready.
 
 **600k iterations** is the 2023 OWASP recommendation for maximum security without impacting user experience.
 
@@ -414,8 +420,7 @@ MIT License - See LICENSE file for details
 
 ## 👤 Author
 
-**Mohamed Sherif Ali**  
- AI & Computer Vision Engineer  
+**Mohamed Sherif Ali**   
 
 ---
 
@@ -427,14 +432,13 @@ MIT License - See LICENSE file for details
 
 ---
 
-## ⚠️ Disclaimer
+## Security Disclaimer
 
-This password manager is provided as-is for educational and personal use. While it implements industry-standard security practices (AES-256-GCM, PBKDF2), no software is 100% secure. Use at your own risk. The author is not responsible for any data loss or security breaches.
+SecurePass is an educational project provided without warranty.
 
-For maximum security, consider using established password managers like:
-- **Bitwarden** (open-source, audited)
-- **KeePassXC** (offline, well-tested)
-- **1Password** (commercial, professionally audited)
+Although it uses established cryptographic primitives, the application has not received an independent security audit, penetration test, or formal cryptographic review. Implementation errors, endpoint compromise, malware, weak master passwords, or backup exposure may still place stored credentials at risk.
+
+For important credentials, use a mature and independently audited password manager.
 
 ---
 
